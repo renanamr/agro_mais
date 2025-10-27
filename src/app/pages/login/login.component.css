@@ -1,0 +1,67 @@
+.login-container {
+    max-width: 380px;
+    margin: 60px auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Inter", sans-serif;
+  }
+  
+  h2 {
+    color: #145c32; /* verde CONAB */
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.4rem 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.8rem;
+    background-color: #004b8d; /* azul CONAB */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background-color: #003d75;
+  }
+  
+  a {
+    display: block;
+    margin-top: 1rem;
+    color: #004b8d;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .error {
+    color: #d93025;
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+  
+  .logo {
+    width: 100%;         
+    height: auto;         
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
