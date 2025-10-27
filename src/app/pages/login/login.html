@@ -1,0 +1,29 @@
+<div class="login-container">
+    <h2>Agro+</h2>
+    <form (submit)="onLogin(); $event.preventDefault()">
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="E-mail"
+        required
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Senha"
+        required
+      />
+  
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+  
+      <a href="#" (click)="onResetPassword(); $event.preventDefault()">
+        Esqueceu a senha?
+      </a>
+  
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>  
