@@ -20,20 +20,12 @@ export class HomeComponent {
   currentYear = new Date().getFullYear();
 
   // Injetamos o Router para navegar ao fazer logout
-  constructor(
-    private router: Router
-    // private authService: AuthService // Descomente quando tiver seu serviço
-  ) {}
+  constructor(private router: Router ) {}
 
-  /**
-   * Método de Logout
-   */
   logout() {
     console.log("Fazendo logout...");
-    // 1. Chame seu serviço de Auth para limpar o token/sessão
-    // await this.authService.logout();
-
-    // 2. Navegue de volta para a tela de login
     this.router.navigate(['/login']);
   }
+
+  
 }
