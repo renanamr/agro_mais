@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth';
+import { AuthService } from '../../services/auth.service';
+import { UserDataService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +18,32 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private userDataService: UserDataService, 
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   async onLogin() {
     this.loading = true;
     this.errorMessage = '';
 
     try {
-      await this.authService.login(this.email, this.password);
-      this.router.navigate(['/home']);
+      const firebaseUser = await this.authService.login(this.email, this.password);
+
+      if (firebaseUser && firebaseUser.uid) {
+        const userProfile = await this.userDataService.loadUserData(firebaseUser.uid);
+
+        if (userProfile) {
+          this.router.navigate(['/home']);
+        } else {
+          this.errorMessage = 'Usuário autenticado, mas não possui um perfil no sistema.';
+          await this.authService.logout(); 
+        }
+      } else {
+        this.errorMessage = 'Ocorreu um erro interno durante o login.';
+      }
+
     } catch (error: any) {
       this.errorMessage = this.handleError(error.code);
     } finally {
