@@ -5,7 +5,8 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
-  User
+  User,
+  createUserWithEmailAndPassword
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
@@ -35,6 +36,17 @@ export class AuthService {
       this.userSubject.next(null);
     } catch (error) {
       console.error('Erro ao sair:', error);
+      throw error;
+    }
+  }
+
+  async register(email: string, password: string): Promise<string | null> {
+    try {
+      const credential = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.userSubject.next(credential.user);
+      return credential.user.uid;
+    } catch (error) {
+      console.error('Erro ao cadastrar usuário:', error);
       throw error;
     }
   }

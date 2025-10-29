@@ -1,24 +1,5 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dsgov navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" routerLink="/home">
-          <img src="logo-agro.png" alt="Logo AgroMais" style="height: 40px;">
-        </a>
-        
-        <div class="d-flex">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" (click)="logout()" style="cursor: pointer;">
-                Sair <i class="bi bi-box-arrow-right ms-1"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  
-  <main class="container py-5 flex-grow-1">
+<app-header></app-header>
+<main class="container py-5 flex-grow-1">
     
     <h1 class="text-center mb-5">Painel de Acesso</h1>
   
@@ -73,12 +54,12 @@
       </div>
   
       <div class="col-lg-4 col-md-6">
-        <a [routerLink]="['/agentes']" class="card-link">
+        <a [routerLink]="['/usuarios']" class="card-link">
           <div class="card h-100 text-center card-dashboard">
             <div class="card-body">
               <i class="bi bi-person-badge-fill display-3 text-success"></i>
-              <h5 class="card-title mt-3">Agentes</h5>
-              <p class="card-text">Gerenciar equipe de campo.</p>
+              <h5 class="card-title mt-3">Usuários</h5>
+              <p class="card-text">Gerenciar equipe.</p>
             </div>
           </div>
         </a>
@@ -96,10 +77,5 @@
         </a>
       </div>
   
-    </div> </main>
-  
-  <footer class="text-center py-4" style="background-color: var(--bs-tertiary-bg); border-top: 1px solid var(--bs-border-color);">
-    <div class="container">
-      <p class="mb-0 text-secondary">&copy; {{ currentYear }} AgroMais. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+    </div> 
+  </main>

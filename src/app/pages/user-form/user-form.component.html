@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="container p-4">
+    <a (click)="goBack()" class="text-decoration-none fw-bold" style="cursor: pointer;">
+      <i class="bi bi-arrow-left me-1"></i>
+      Voltar
+    </a>
+  </div>
+  
+  <div class="container px-4">
+    <h1 class="h2 mb-4">{{ pageTitle() }}</h1>
+  </div>
+  
+  @if(loading()){
+    <app-loading></app-loading>
+  }@else{
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    
+      <app-container-form title="Dados do usuário">
+        <div class="col-12 col-md-6">
+          <label for="name" class="form-label">Nome<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <div *ngIf="isInvalid('name')" class="invalid-feedback d-block">
+            Nome é obrigatório.
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-6">
+          <label for="email" class="form-label">E-mail<span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <div *ngIf="isInvalid('email')" class="invalid-feedback d-block">
+            E-mail inválido.
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-4">
+          <label for="cpf" class="form-label">CPF<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="cpf" formControlName="cpf">
+          <div *ngIf="isInvalid('cpf')" class="invalid-feedback d-block">
+            CPF inválido.
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-4">
+          <label for="birthDate" class="form-label">Data de Nasc.<span class="text-danger">*</span></label>
+          <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+          <div *ngIf="isInvalid('birthDate')" class="invalid-feedback d-block">
+            Data inválida.
+          </div>
+        </div>
+  
+        <div class="col-12 col-md-4">
+          <label for="phone" class="form-label">Telefone<span class="text-danger">*</span></label>
+          <input type="tel" class="form-control" id="phone" formControlName="phone">
+          <div *ngIf="isInvalid('phone')" class="invalid-feedback d-block">
+            Telefone inválido.
+          </div>
+        </div>
+      </app-container-form>
+    
+  
+      <app-container-form title="Permissões do Sistema">
+        <div class="col-12 col-md-6">
+          <label for="role" class="form-label">Papel<span class="text-danger">*</span></label>
+          <select class="form-select" id="role" formControlName="role">
+            <option value="Agente">Agente</option>
+            <option value="Administrador">Administrador</option>
+          </select>
+        </div>
+  
+        <div class="col-12 col-md-6">
+          <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+          <select class="form-select" id="status" formControlName="status">
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+        </div>
+      </app-container-form>
+  
+  
+    
+      <div class="container px-4 mb-5" *ngIf="pageMode() !== 'View'">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
+          <span>Salvar</span>
+        </button>
+      </div>
+    </form>
+  }

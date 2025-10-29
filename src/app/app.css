@@ -1,0 +1,26 @@
+/*
+ * 1. Estiliza o próprio <app-root> (o :host) 
+ * para se comportar como um container flex que
+ * ocupa 100% da altura da tela (100vh).
+ */
+ :host {
+    display: flex;
+    flex-direction: column; /* Organiza os filhos verticalmente */
+    min-height: 100vh;     /* Altura mínima de 100% da viewport */
+  }
+  
+  /*
+   * 2. Esta é a mágica:
+   * Diz ao 'div' do conteúdo principal para "crescer" 
+   * e ocupar todo o espaço vertical que sobrar.
+   */
+  .main-content {
+    flex-grow: 1;
+  }
+  
+  /* * 3. (Opcional, mas recomendado)
+   * Garante que o rodapé não encolha.
+   */
+  app-footer {
+    flex-shrink: 0;
+  }

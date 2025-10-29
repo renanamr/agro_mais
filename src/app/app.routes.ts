@@ -1,19 +1,37 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { AgentComponent } from './pages/agent/agent.component';
 import { CommunityComponent } from './pages/community/community.component';
 import { VisitComponent } from './pages/visit/visit.component';
 import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { MeetingComponent } from './pages/meeting/meeting.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { UserComponent } from './pages/user/user.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
   { 
-    path: 'agentes', 
-    title: "Agentes",
-    component: AgentComponent
+    path: 'usuarios', 
+    title: "Usuários",
+    children: [
+      {
+        path: '', 
+        component: UserComponent 
+      },
+      {
+        path: 'novo', 
+        component: UserFormComponent
+      },
+      {
+        path: 'editar/:id', 
+        component: UserFormComponent 
+      },
+      {
+        path: 'visualizar/:id', 
+        component: UserFormComponent
+      }
+    ]
   },
   { 
     path: 'comunidades', 

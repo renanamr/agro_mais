@@ -6,7 +6,7 @@ import { FirebaseCollectionsUtils } from '../utils/firebase_collections_utils';
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class UserService {
   
   readonly currentUser = signal<User | null>(null);
 
