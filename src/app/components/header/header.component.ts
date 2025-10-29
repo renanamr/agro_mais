@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserDataService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -14,12 +14,12 @@ export class HeaderComponent {
     constructor(
       private router: Router,
       private authService: AuthService,
-      private userDataService: UserDataService,
+      private userService: UserService,
     ) {}
   
     logout() {
       console.log("Fazendo logout...");
-      this.userDataService.clearUserData();
+      this.userService.clearUserData();
       this.authService.logout();
       this.router.navigate(['/login']);
     }

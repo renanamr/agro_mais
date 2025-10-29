@@ -1,5 +1,6 @@
 //Define os papéis (perfis) de usuário permitidos no sistema.
-export type UserRole = 'admin' | 'agente';
+export type UserRole = 'Admin' | 'Agente';
+export type UserStatus = 'Ativo' | 'Inativo';
 
 /**
  * Interface auxiliar para os dados brutos do Firestore (Português)
@@ -12,6 +13,7 @@ export interface UsuarioData {
   dataNascimento: string;
   papel: UserRole;
   telefone: string;
+  status: UserStatus; 
 }
 
 export class User {
@@ -22,6 +24,7 @@ export class User {
   birthDate: string;
   role: UserRole;
   phone: string;
+  status: UserStatus; 
 
   constructor(options: {
     id: string;
@@ -31,6 +34,7 @@ export class User {
     birthDate: string;
     role: UserRole;
     phone: string;
+    status: UserStatus;
   }) {
     this.id = options.id;
     this.name = options.name;
@@ -39,6 +43,7 @@ export class User {
     this.birthDate = options.birthDate;
     this.role = options.role;
     this.phone = options.phone;
+    this.status = options.status;
   }
 
 
@@ -50,7 +55,8 @@ export class User {
       cpf: data.cpf,
       birthDate: data.dataNascimento,
       role: data.papel,
-      phone: data.telefone
+      phone: data.telefone,
+      status: data.status,
     });
   }
 
@@ -61,7 +67,8 @@ export class User {
       cpf: this.cpf,
       dataNascimento: this.birthDate,
       papel: this.role,
-      telefone: this.phone
+      telefone: this.phone,
+      status: this.status
     };
   }
 }

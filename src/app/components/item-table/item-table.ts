@@ -22,4 +22,22 @@ export class ItemTableComponent {
   // Eventos para os botões de ação
   @Output() editClick = new EventEmitter<void>();
   @Output() viewClick = new EventEmitter<void>();
+  @Output() deleteClick = new EventEmitter<void>();
+
+
+  public get hasEditListener(): boolean {
+    return this.editClick.observed;
+  }
+
+  public get hasViewListener(): boolean {
+    return this.viewClick.observed;
+  }
+
+  public get hasDeleteListener(): boolean {
+    return this.deleteClick.observed;
+  }
+
+  public get hasAnyAction(): boolean {
+    return this.hasEditListener || this.hasViewListener || this.hasDeleteListener;
+  }
 }

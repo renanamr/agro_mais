@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { UserDataService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent {
   errorMessage = '';
 
   constructor(
-    private userDataService: UserDataService, 
+    private userService: UserService, 
     private authService: AuthService,
     private router: Router
   ) {}
@@ -32,7 +32,7 @@ export class LoginComponent {
       const firebaseUser = await this.authService.login(this.email, this.password);
 
       if (firebaseUser && firebaseUser.uid) {
-        const userProfile = await this.userDataService.loadUserData(firebaseUser.uid);
+        const userProfile = await this.userService.loadUserData(firebaseUser.uid);
 
         if (userProfile) {
           this.router.navigate(['/home']);
