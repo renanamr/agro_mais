@@ -1,49 +1,44 @@
 <app-header></app-header>
-  <div class="p-4">
+<div class="p-4">
 
-    <app-card-page
-      title="Listagem de Usuários" 
-      newButtonText="Novo Usuário" 
-      (newClick)="onNewUser()">
-      
-      @if(loading()){
-        <app-loading></app-loading>
-      }@else{
-        <div>
-        
-          <app-table-header>
-            <div class="col-3">Nome</div>
-            <div class="col-3">E-mail</div>
-            <div class="col-2">Papel</div>
-            <div class="col-2">Status</div>
-            <div class="col-2">Ações</div>
-          </app-table-header>
-    
-          <div>
-            <app-item-table
-              *ngFor="let user of userDataService.userList()"
-              (editClick)="onEditUser(user)"
-              (viewClick)="onViewUser(user)"
-              (deleteClick)="onDeleteUser(user)"
-              actionsCol="col-2"
-            >
-              <div class="col-3">{{ user.name }}</div>
-              <div class="col-3 text-truncate">{{ user.email }}</div>
-              <div class="col-2">{{ user.role }}</div>
-              <div class="col-2">
-                <span class="badge" [ngClass]="user.status === 'Ativo' ? 'text-bg-success' : 'text-bg-secondary'">
-                  {{ user.status }}
-                </span>
-              </div>
-            </app-item-table>
+  <app-card-page title="Listagem de Usuários" newButtonText="Novo Usuário" (newClick)="onNewUser()">
+
+    @if(loading()){
+    <app-loading></app-loading>
+    }@else{
+    <div>
+
+      <app-table-header>
+        <div class="col-3">Nome</div>
+        <div class="col-3">E-mail</div>
+        <div class="col-2">Papel</div>
+        <div class="col-2">Status</div>
+        <div class="col-2">Ações</div>
+      </app-table-header>
+
+      <div>
+        @for(user of userDataService.userList(); track $index){
+        <app-item-table (editClick)="onEditUser(user)" (viewClick)="onViewUser(user)" (deleteClick)="onDeleteUser(user)"
+          actionsCol="col-2">
+          <div class="col-3">{{ user.name }}</div>
+          <div class="col-3 text-truncate">{{ user.email }}</div>
+          <div class="col-2">{{ user.role }}</div>
+          <div class="col-2">
+            <span class="badge" [ngClass]="user.status === 'Ativo' ? 'text-bg-success' : 'text-bg-secondary'">
+              {{ user.status }}
+            </span>
           </div>
-    
-          <div *ngIf="userDataService.userList().length === 0" class="text-center p-4 text-muted">
-            Nenhum usuário encontrado.
-          </div>
-    
-        </div>
-      }  
-    </app-card-page>
-  
-  </div>
+        </app-item-table>
+        }
+      </div>
+
+      @if(userDataService.userList().length === 0){
+      <div class="text-center p-4 text-muted">
+        Nenhum usuário encontrado.
+      </div>
+      }
+    </div>
+    }
+  </app-card-page>
+
+</div>
