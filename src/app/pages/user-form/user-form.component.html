@@ -35,16 +35,25 @@
         <div class="col-12 col-md-4">
           <label for="cpf" class="form-label">CPF<span class="text-danger">*</span></label>
           <input type="text" class="form-control" id="cpf" formControlName="cpf">
+          <div *ngIf="isInvalid('cpf')" class="invalid-feedback d-block">
+            CPF inválido.
+          </div>
         </div>
   
         <div class="col-12 col-md-4">
           <label for="birthDate" class="form-label">Data de Nasc.<span class="text-danger">*</span></label>
           <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+          <div *ngIf="isInvalid('birthDate')" class="invalid-feedback d-block">
+            Data inválida.
+          </div>
         </div>
   
         <div class="col-12 col-md-4">
           <label for="phone" class="form-label">Telefone<span class="text-danger">*</span></label>
           <input type="tel" class="form-control" id="phone" formControlName="phone">
+          <div *ngIf="isInvalid('phone')" class="invalid-feedback d-block">
+            Telefone inválido.
+          </div>
         </div>
       </app-container-form>
     
