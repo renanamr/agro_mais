@@ -6,6 +6,7 @@ import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { MeetingComponent } from './pages/meeting/meeting.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { UserComponent } from './pages/user/user.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,7 +14,24 @@ export const routes: Routes = [
   { 
     path: 'usuarios', 
     title: "Usuários",
-    component: UserComponent
+    children: [
+      {
+        path: '', 
+        component: UserComponent 
+      },
+      {
+        path: 'novo', 
+        component: UserFormComponent
+      },
+      {
+        path: 'editar/:id', 
+        component: UserFormComponent 
+      },
+      {
+        path: 'visualizar/:id', 
+        component: UserFormComponent
+      }
+    ]
   },
   { 
     path: 'comunidades', 

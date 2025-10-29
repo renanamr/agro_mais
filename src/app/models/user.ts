@@ -1,5 +1,5 @@
 //Define os papéis (perfis) de usuário permitidos no sistema.
-export type UserRole = 'Admin' | 'Agente';
+export type UserRole = 'Administrador' | 'Agente';
 export type UserStatus = 'Ativo' | 'Inativo';
 
 /**

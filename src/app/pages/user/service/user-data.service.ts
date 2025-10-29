@@ -35,6 +35,22 @@ export class UserDataService {
     }
   }
 
+  async getUser(id: string): Promise<User | null> {
+    try {
+      const firebaseData = await this.firebaseService.get<UsuarioData>('usuarios', id);
+
+      if (firebaseData) {
+        const { id: docId, ...docData } = firebaseData;
+        return User.fromFirestore(docData as UsuarioData, docId);
+      }
+      
+      return null;
+
+    } catch (error) {
+      console.error(`Erro ao buscar usuário ${id}:`, error);
+      return null;
+    }
+  }
 
   async createUser(payload: CreateUserPayload): Promise<User> {
     const { password, ...profileData } = payload; // Separa a senha do resto do perfil

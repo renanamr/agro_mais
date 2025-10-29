@@ -62,7 +62,7 @@ export class UserComponent implements OnInit {
 
 
   onViewUser(user: User) {
-    alert('Visualizar usuário: ' + user.name);
+    this.router.navigate(['/usuarios/visualizar', user.id]);
   }
 
 
