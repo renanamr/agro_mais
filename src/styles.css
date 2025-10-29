@@ -76,11 +76,16 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     color: var(--bs-heading-color);
     font-weight: var(--bs-heading-font-weight);
+  }
+
+  .card-body{
+    background-color: #f8f9fa;
   }
   
   .btn-success {

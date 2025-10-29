@@ -1,49 +1,51 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { User } from '../../models/user';
 import { CreateUserPayload } from '../user/models/user-payload.model';
 import { UserDataService } from '../user/service/user-data.service';
 import { HeaderComponent } from "../../components/header/header.component";
+import { ContainerFormComponent } from "../../components/container-form/container-form.component";
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     LoadingComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContainerFormComponent
 ],
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  
+
   public userForm: FormGroup;
   public loading = signal<boolean>(true);
   public pageMode = signal<'Create' | 'Edit' | 'View'>('Create');
   public pageTitle = signal<string>('Cadastro de novo usuário');
-  
+
   private currentUserId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private userDataService: UserDataService,
-    private router: Router,
-    private route: ActivatedRoute, 
-    private location: Location 
+    private route: ActivatedRoute,
+    private location: Location
   ) {
     // Inicializa o formulário
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      cpf: ['', [Validators.required]], // Adicione um validador de CPF real aqui
+      cpf: ['', [Validators.required]],
       birthDate: ['', [Validators.required]],
-      role: ['agente', [Validators.required]], // Valor padrão
+      role: ['', [Validators.required]],
       phone: ['', [Validators.required]],
+      status: ['Ativo', [Validators.required]],
     });
   }
 
@@ -57,17 +59,16 @@ export class UserFormComponent implements OnInit {
   private async determineMode() {
     // Pega o 'id' da URL (ex: /usuarios/editar/123)
     const id = this.route.snapshot.paramMap.get('id');
-    // Pega o modo da query string (ex: /usuarios/editar/123?mode=view)
-    const mode = this.route.snapshot.queryParamMap.get('mode');
-    
+    const urlSegment = this.route.snapshot.url[0]?.path;
+
     if (id) {
       this.currentUserId = id;
-      
-      if (mode === 'view') {
+
+      if (urlSegment === 'visualizar') {
         this.pageMode.set('View');
         this.pageTitle.set('Visualização de usuário');
         await this.loadUser(id);
-        this.userForm.disable(); // Desabilita todos os campos
+        this.userForm.disable();
       } else {
         this.pageMode.set('Edit');
         this.pageTitle.set('Edição de usuário');
@@ -76,7 +77,7 @@ export class UserFormComponent implements OnInit {
     } else {
       this.pageMode.set('Create');
       this.pageTitle.set('Cadastro de novo usuário');
-      this.loading.set(false); // Não precisa carregar nada
+      this.loading.set(false);
     }
   }
 
@@ -87,7 +88,6 @@ export class UserFormComponent implements OnInit {
     this.loading.set(true);
     const user = await this.userDataService.getUser(id);
     if (user) {
-      // Usa patchValue para preencher o formulário com os dados do modelo (Inglês)
       this.userForm.patchValue(user);
     } else {
       console.error('Usuário não encontrado!');
@@ -102,7 +102,7 @@ export class UserFormComponent implements OnInit {
   async onSubmit() {
     if (this.userForm.invalid) {
       // Marca todos os campos como "tocados" para exibir os erros
-      this.userForm.markAllAsTouched(); 
+      this.userForm.markAllAsTouched();
       return;
     }
 
@@ -125,21 +125,18 @@ export class UserFormComponent implements OnInit {
    * Lógica de Criação de Usuário.
    */
   private async handleCreate() {
-    // 1. Gera a senha (conforme solicitado)
+    // Gera a senha (conforme solicitado)
     const generatedPassword = this.generateRandomPassword();
 
-    // 2. Monta o payload (Inglês)
     const payload: CreateUserPayload = {
       ...this.userForm.value,
       password: generatedPassword
     };
 
-    // 3. Chama o serviço
     await this.userDataService.createUser(payload);
-    
-    // 4. (Opcional) Informa a senha gerada ao admin
+
     alert(`Usuário criado com sucesso! Senha temporária: ${generatedPassword}`);
-    
+
     this.goBack();
   }
 
@@ -149,22 +146,17 @@ export class UserFormComponent implements OnInit {
   private async handleUpdate() {
     if (!this.currentUserId) return;
 
-    // 1. Cria uma nova instância de User com os dados atualizados
+    // Cria uma nova instância de User com os dados atualizados
     const updatedUser = new User({
       id: this.currentUserId,
       ...this.userForm.value
     });
 
-    // 2. Chama o serviço
     await this.userDataService.updateUser(updatedUser);
     alert('Usuário atualizado com sucesso!');
     this.goBack();
   }
 
-  /**
-   * Gera uma senha aleatória simples (apenas para exemplo).
-   * Em produção, use uma biblioteca mais robusta ou um Cloud Function.
-   */
   private generateRandomPassword(): string {
     return Math.random().toString(36).slice(-8);
   }

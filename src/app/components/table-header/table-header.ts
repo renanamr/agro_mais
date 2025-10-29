@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './table-header.html',
   styleUrl: './table-header.css',
   host: {
-    'class': 'row g-0 p-3 bg-light fw-bold text-muted rounded-top'
+    'class': 'row g-0 p-3 fw-bold text-muted rounded-top'
   }
 })
 export class TableHeader {

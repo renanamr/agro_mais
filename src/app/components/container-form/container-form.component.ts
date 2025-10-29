@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-container-form',
@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './container-form.component.html',
   styleUrl: './container-form.component.css',
 })
-export class ContainerForm {
-
+export class ContainerFormComponent {
+  @Input({required: true}) title: string = 'Título';
 }

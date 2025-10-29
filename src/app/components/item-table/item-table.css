@@ -1,7 +1,7 @@
-.list-item-hover {
-    transition: background-color 0.15s ease-in-out;
-  }
-  
-  .list-item-hover:hover {
-    background-color: #f8f9fa;
-  }
+:host {
+  transition: background-color 0.15s ease-in-out;
+}
+
+:host(:hover) {
+  background-color: #F0F0F0; 
+}
