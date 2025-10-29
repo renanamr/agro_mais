@@ -1,0 +1,7 @@
+.list-item-hover {
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .list-item-hover:hover {
+    background-color: #f8f9fa;
+  }

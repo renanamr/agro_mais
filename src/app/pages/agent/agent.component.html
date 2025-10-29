@@ -1,1 +1,37 @@
-<p>agent works!</p>
+<app-header></app-header>
+<div class="p-4">
+
+    <app-card-page 
+      title="Listagem de Agentes" 
+      newButtonText="Novo" 
+      (newClick)="onNewAgent()">
+      
+      <app-table-header>
+        <div class="col-3">Nome</div>
+        <div class="col-3">E-mail</div>
+        <div class="col-2">Papel</div>
+        <div class="col-2">Status</div>
+        <div class="col-2 text-end">Ações</div>
+      </app-table-header>
+  
+      <div>
+        <app-item-table
+        *ngFor="let user of users"
+        (editClick)="onEditAgent(user)"
+        (viewClick)="onViewAgent(user)"
+        actionsCol="col-2"
+      >
+        <div class="col-3">{{ user.name }}</div>
+        <div class="col-3 text-truncate">{{ user.email }}</div>
+        <div class="col-2">{{ user.role }}</div>
+        <div class="col-2">
+          <span class="badge" [ngClass]="user.status === 'Ativo' ? 'text-bg-success' : 'text-bg-secondary'">
+            {{ user.status }}
+          </span>
+        </div>
+        </app-item-table>
+      </div>
+  
+    </app-card-page >
+  
+  </div>

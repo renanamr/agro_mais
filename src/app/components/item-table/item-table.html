@@ -1,0 +1,10 @@
+<ng-content></ng-content>
+
+<div [ngClass]="actionsCol" class="text-end">
+  <button (click)="editClick.emit()" class="btn btn-link btn-sm p-1" title="Editar">
+    <i class="bi bi-pencil-square text-primary"></i>
+  </button>
+  <button (click)="viewClick.emit()" class="btn btn-link btn-sm p-1 ms-1" title="Visualizar">
+    <i class="bi bi-graph-up text-success"></i>
+  </button>
+</div>
