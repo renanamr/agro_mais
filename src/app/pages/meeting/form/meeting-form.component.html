@@ -13,47 +13,96 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Data da Reunião</label>
-              <input type="date" class="form-control" [(ngModel)]="meeting()!.meetingDate" required>
+              <input 
+                type="date" 
+                class="form-control" 
+                [value]="meeting()!.meetingDate" 
+                (input)="updateField('meetingDate', $any($event.target).value)" 
+                name="meetingDate" 
+                required>
             </div>
             <div class="col-md-3 mb-3">
               <label>Hora Início</label>
-              <input type="time" class="form-control" [(ngModel)]="meeting()!.startTime" required>
+              <input 
+                type="time" 
+                class="form-control" 
+                [value]="meeting()!.startTime" 
+                (input)="updateField('startTime', $any($event.target).value)" 
+                name="startTime" 
+                required>
             </div>
             <div class="col-md-3 mb-3">
               <label>Hora Fim</label>
-              <input type="time" class="form-control" [(ngModel)]="meeting()!.endTime" required>
+              <input 
+                type="time" 
+                class="form-control" 
+                [value]="meeting()!.endTime" 
+                (input)="updateField('endTime', $any($event.target).value)" 
+                name="endTime" 
+                required>
             </div>
           </div>
 
           <div class="mb-3">
             <label>Título</label>
-            <input type="text" class="form-control" [(ngModel)]="meeting()!.title" required>
+            <input 
+              type="text" 
+              class="form-control" 
+              [value]="meeting()!.title" 
+              (input)="updateField('title', $any($event.target).value)" 
+              name="title" 
+              required>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Agente</label>
-              <input type="text" class="form-control" [(ngModel)]="meeting()!.agentName">
+              <input 
+                type="text" 
+                class="form-control" 
+                [value]="meeting()!.agentName" 
+                (input)="updateField('agentName', $any($event.target).value)" 
+                name="agentName">
             </div>
             <div class="col-md-6 mb-3">
               <label>Comunidade</label>
-              <input type="text" class="form-control" [(ngModel)]="meeting()!.communityName">
+              <input 
+                type="text" 
+                class="form-control" 
+                [value]="meeting()!.communityName" 
+                (input)="updateField('communityName', $any($event.target).value)" 
+                name="communityName">
             </div>
           </div>
 
           <div class="mb-3">
             <label>Agendador</label>
-            <input type="text" class="form-control" [(ngModel)]="meeting()!.schedulingPersonName">
+            <input 
+              type="text" 
+              class="form-control" 
+              [value]="meeting()!.schedulingPersonName" 
+              (input)="updateField('schedulingPersonName', $any($event.target).value)" 
+              name="schedulingPersonName">
           </div>
 
           <div class="mb-3">
             <label>Observações</label>
-            <textarea class="form-control" rows="3" [(ngModel)]="meeting()!.notes"></textarea>
+            <textarea 
+              class="form-control" 
+              rows="3" 
+              [value]="meeting()!.notes" 
+              (input)="updateField('notes', $any($event.target).value)" 
+              name="notes"></textarea>
           </div>
 
           <div class="mb-3">
             <label>Ata da Reunião</label>
-            <textarea class="form-control" rows="5" [(ngModel)]="meeting()!.meetingMinutes"></textarea>
+            <textarea 
+              class="form-control" 
+              rows="5" 
+              [value]="meeting()!.meetingMinutes" 
+              (input)="updateField('meetingMinutes', $any($event.target).value)" 
+              name="meetingMinutes"></textarea>
           </div>
 
           <div class="d-flex gap-2">
