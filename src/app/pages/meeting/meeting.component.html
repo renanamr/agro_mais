@@ -1,1 +1,29 @@
-<p>meeting works!</p>
+<app-header></app-header>
+<div class="p-4">
+  <app-card-page title="Reuniões" newButtonText="Nova" (newClick)="onNewMeeting()">
+    @if(loading()) {
+      <app-loading></app-loading>
+    } @else {
+      <app-table-header>
+        <div class="col-2">Data</div>
+        <div class="col-3">Título</div>
+        <div class="col-2">Agente</div>
+        <div class="col-2">Comunidade</div>
+        <div class="col-3">Ações</div>
+      </app-table-header>
+
+      @for(m of meetingService.meetingList(); track m.id) {
+        <app-item-table (editClick)="onEditMeeting(m)" (viewClick)="onViewMeeting(m)" (deleteClick)="onDeleteMeeting(m)" actionsCol="col-3">
+          <div class="col-2">{{ m.meetingDate | date:'dd/MM/yy' }}</div>
+          <div class="col-3 text-truncate">{{ m.title }}</div>
+          <div class="col-2">{{ m.agentName }}</div>
+          <div class="col-2">{{ m.communityName }}</div>
+        </app-item-table>
+      }
+
+      @if(meetingService.meetingList().length === 0) {
+        <div class="text-center p-4 text-muted">Nenhuma reunião.</div>
+      }
+    }
+  </app-card-page>
+</div>
