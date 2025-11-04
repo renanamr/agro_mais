@@ -1,0 +1,38 @@
+<!-- src/app/pages/workshop/view/workshop-view.component.html -->
+<app-header></app-header>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3>Detalhes da Oficina</h3>
+      <button class="btn btn-outline-primary btn-sm" (click)="edit()">Editar</button>
+    </div>
+    <div class="card-body">
+
+      @if(loading()){
+        <app-loading></app-loading>
+      } @else {
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Título:</strong> {{ workshop()?.title }}</p>
+            <p><strong>Hora:</strong> {{ workshop()?.startTime }} - {{ workshop()?.endTime }}</p>
+            <p><strong>Duração:</strong> {{ workshop()?.durationHours }} horas</p>
+            <p><strong>Máx. Participantes:</strong> {{ workshop()?.maxParticipants }}</p>
+            <p><strong>Agente:</strong> {{ workshop()!.agentName }}</p>
+            <p><strong>Comunidade:</strong> {{ workshop()!.communityName }}</p>
+            <p><strong>Agendador:</strong> {{ workshop()!.schedulingPersonName }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Descrição:</strong></p>
+            <p class="text-muted">{{ workshop()?.description || 'Nenhuma' }}</p>
+            <hr>
+            <p><strong>Notas:</strong></p>
+            <div class="border p-3 bg-light" 
+                 [innerHTML]="quebrasDeLinha(workshop()?.notes)">
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary mt-3" (click)="back()">Voltar</button>
+      }
+    </div>
+  </div>
+</div>

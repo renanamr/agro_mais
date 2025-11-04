@@ -1,0 +1,34 @@
+<app-header></app-header>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header"><h3>{{ isEdit() ? 'Editar' : 'Nova' }} Oficina</h3></div>
+    <div class="card-body">
+      @if(loading()) {
+        <app-loading></app-loading>
+      } @else {
+        <form (ngSubmit)="save()">
+          <div class="row g-3">
+            <div class="col-md-6"><input type="text" class="form-control" [value]="workshop()!.title" (input)="updateField('title', $any($event.target).value)" placeholder="Título" required></div>
+            <div class="col-md-3"><input type="time" class="form-control" [value]="workshop()!.startTime" (input)="updateField('startTime', $any($event.target).value)" required></div>
+            <div class="col-md-3"><input type="time" class="form-control" [value]="workshop()!.endTime" (input)="updateField('endTime', $any($event.target).value)" required></div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6"><input type="number" class="form-control" [value]="workshop()!.durationHours" (input)="updateField('durationHours', +$any($event.target).value)" placeholder="Duração (horas)" required></div>
+            <div class="col-md-6"><input type="number" class="form-control" [value]="workshop()!.maxParticipants" (input)="updateField('maxParticipants', +$any($event.target).value)" placeholder="Máx. Participantes" required></div>
+          </div>
+          <div class="mt-3"><textarea class="form-control" rows="3" [value]="workshop()!.description" (input)="updateField('description', $any($event.target).value)" placeholder="Descrição"></textarea></div>
+          <div class="mt-3"><textarea class="form-control" rows="3" [value]="workshop()!.notes" (input)="updateField('notes', $any($event.target).value)" placeholder="Notas"></textarea></div>
+          <div class="row mt-3">
+            <div class="col-md-6"><input type="text" class="form-control" [value]="workshop()!.agentName" (input)="updateField('agentName', $any($event.target).value)" placeholder="Agente"></div>
+            <div class="col-md-6"><input type="text" class="form-control" [value]="workshop()!.communityName" (input)="updateField('communityName', $any($event.target).value)" placeholder="Comunidade"></div>
+          </div>
+          <div class="mt-3"><input type="text" class="form-control" [value]="workshop()!.schedulingPersonName" (input)="updateField('schedulingPersonName', $any($event.target).value)" placeholder="Agendador"></div>
+          <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

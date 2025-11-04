@@ -43,10 +43,10 @@ export const routes: Routes = [
     title: "Visitas",
     component: VisitComponent
   },
-  { 
-    path: 'oficinas', 
-    title: "Oficinas",
-    component: WorkshopComponent
+  {
+    path: 'oficinas',
+    title: 'Oficinas',
+    loadChildren: () => import('./pages/workshop/workshop.routes').then(m => m.workshopRoutes)
   },
   { 
     path: 'reunioes', 
