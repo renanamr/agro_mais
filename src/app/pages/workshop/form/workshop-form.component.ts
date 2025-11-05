@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { LoadingComponent } from '../../../components/loading/loading.component';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { ContainerFormComponent } from "../../../components/container-form/container-form.component";
 
 @Component({
   selector: 'app-workshop-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, LoadingComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, LoadingComponent, ContainerFormComponent],
   templateUrl: './workshop-form.component.html',
   styleUrl: './workshop-form.component.css'
 })
