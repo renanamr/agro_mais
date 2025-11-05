@@ -48,11 +48,12 @@ export const routes: Routes = [
     title: 'Oficinas',
     loadChildren: () => import('./pages/workshop/workshop.routes').then(m => m.workshopRoutes)
   },
-  { 
-    path: 'reunioes', 
-    title: "Reuniões",
-    component: MeetingComponent
-  },
+{
+  path: 'reunioes',
+  title: 'Reuniões',
+  loadChildren: () => import('./pages/meeting/meeting.routes').then(m => m.meetingRoutes)
+},
+
   { 
     path: 'admin', 
     title: "Administradores",

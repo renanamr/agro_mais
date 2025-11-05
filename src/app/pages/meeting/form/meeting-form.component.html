@@ -1,0 +1,125 @@
+<app-header></app-header>
+<div class="container p-4">
+  <a (click)="cancel()" class="text-decoration-none fw-bold" style="cursor: pointer;">
+    <i class="bi bi-arrow-left me-1"></i>
+    Voltar
+  </a>
+</div>
+
+<div class="container px-4">
+  <h1 class="h2 mb-4">{{ isEdit() ? 'Editar' : 'Cadastrar' }} Reunião</h1>
+</div>
+
+@if(loading()){
+  <app-loading></app-loading>
+} @else {
+  <form (ngSubmit)="save()">
+
+    <app-container-form title="Dados gerais">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Data da Reunião</label>
+          <input 
+            type="date" 
+            class="form-control" 
+            [value]="meeting()!.meetingDate" 
+            (input)="updateField('meetingDate', $any($event.target).value)" 
+            name="meetingDate" 
+            required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Hora Início</label>
+          <input 
+            type="time" 
+            class="form-control" 
+            [value]="meeting()!.startTime" 
+            (input)="updateField('startTime', $any($event.target).value)" 
+            name="startTime" 
+            required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Hora Fim</label>
+          <input 
+            type="time" 
+            class="form-control" 
+            [value]="meeting()!.endTime" 
+            (input)="updateField('endTime', $any($event.target).value)" 
+            name="endTime" 
+            required>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label>Título</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          [value]="meeting()!.title" 
+          (input)="updateField('title', $any($event.target).value)" 
+          name="title" 
+          required>
+      </div>
+    </app-container-form>
+
+    <app-container-form title="Responsáveis">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Agente</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [value]="meeting()!.agentName" 
+            (input)="updateField('agentName', $any($event.target).value)" 
+            name="agentName">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Comunidade</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [value]="meeting()!.communityName" 
+            (input)="updateField('communityName', $any($event.target).value)" 
+            name="communityName">
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label>Agendador</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          [value]="meeting()!.schedulingPersonName" 
+          (input)="updateField('schedulingPersonName', $any($event.target).value)" 
+          name="schedulingPersonName">
+      </div>
+    </app-container-form>
+
+    <app-container-form title="Detalhes">
+      <div class="mb-3">
+        <label>Observações</label>
+        <textarea 
+          class="form-control" 
+          rows="3" 
+          [value]="meeting()!.notes" 
+          (input)="updateField('notes', $any($event.target).value)" 
+          name="notes"></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label>Ata da Reunião</label>
+        <textarea 
+          class="form-control" 
+          rows="5" 
+          [value]="meeting()!.meetingMinutes" 
+          (input)="updateField('meetingMinutes', $any($event.target).value)" 
+          name="meetingMinutes"></textarea>
+      </div>
+    </app-container-form>
+
+    <div class="container px-4 mb-5">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
+        <span>Salvar</span>
+      </button>
+    </div>
+  </form>
+}
