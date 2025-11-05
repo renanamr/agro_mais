@@ -1,1 +1,29 @@
-<p>workshop works!</p>
+<app-header></app-header>
+<div class="p-4">
+  <app-card-page title="Oficinas" newButtonText="Nova" (newClick)="onNew()">
+    @if(loading()) {
+      <app-loading></app-loading>
+    } @else {
+      <app-table-header>
+        <div class="col-3">Título</div>
+        <div class="col-2">Data/Hora</div>
+        <div class="col-2">Duração</div>
+        <div class="col-2">Participantes</div>
+        <div class="col-3">Ações</div>
+      </app-table-header>
+
+      @for(w of workshopService.workshopList(); track w.id) {
+        <app-item-table (editClick)="onEdit(w)" (viewClick)="onView(w)" (deleteClick)="onDelete(w)" actionsCol="col-3">
+          <div class="col-3 text-truncate">{{ w.title }}</div>
+          <div class="col-2">{{ w.startTime }} - {{ w.endTime }}</div>
+          <div class="col-2">{{ w.durationHours }}h</div>
+          <div class="col-2">{{ w.maxParticipants }}</div>
+        </app-item-table>
+      }
+
+      @if(workshopService.workshopList().length === 0) {
+        <div class="text-center p-4 text-muted">Nenhuma oficina.</div>
+      }
+    }
+  </app-card-page>
+</div>
