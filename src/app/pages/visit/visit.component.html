@@ -1,1 +1,48 @@
-<p>visit works!</p>
+<app-header></app-header>
+
+<div class="p-4">
+  <app-card-page title="Visitas" newButtonText="Nova" (newClick)="onNew()">
+
+    @if (loading()) {
+      <app-loading></app-loading>
+    } @else {
+
+      <app-table-header>
+        <div class="col-3">Data</div>
+        <div class="col-3">Horário</div>
+        <div class="col-4">Aglomerado</div>
+        <div class="col-2">Ações</div>
+      </app-table-header>
+
+      @for(v of visitService.visitList(); track v.id) {
+        <app-item-table
+          (editClick)="onEdit(v)"
+          (viewClick)="onView(v)"
+          (deleteClick)="onDelete(v)"
+          actionsCol="col-2">
+
+          <!-- DATA -->
+          <div class="col-3 text-truncate">
+            {{ v.visitDate }}
+          </div>
+
+          <!-- HORÁRIO -->
+          <div class="col-3 text-truncate">
+            {{ v.startTime }} - {{ v.endTime || '—' }}
+          </div>
+
+          <!-- AGLOMERADO -->
+          <div class="col-4 text-truncate">
+            {{ v.clusterName }}
+          </div>
+
+        </app-item-table>
+      }
+
+      @if (visitService.visitList().length === 0) {
+        <div class="text-center p-4 text-muted">Nenhuma visita.</div>
+      }
+
+    }
+  </app-card-page>
+</div>

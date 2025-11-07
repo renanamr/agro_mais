@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+}

@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { CommunityComponent } from './pages/community/community.component';
-import { VisitComponent } from './pages/visit/visit.component';
-import { WorkshopComponent } from './pages/workshop/workshop.component';
-import { MeetingComponent } from './pages/meeting/meeting.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { UserComponent } from './pages/user/user.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
@@ -36,12 +32,12 @@ export const routes: Routes = [
   { 
     path: 'comunidades', 
     title: "Comunidades",
-    component: CommunityComponent
+    loadChildren: () => import('./pages/community/community.routes').then(c => c.communityRoutes)
   },
   { 
     path: 'visitas', 
     title: "Visitas",
-    component: VisitComponent
+    loadChildren: () => import('./pages/visit/visit.routes').then(v => v.visitRoutes)
   },
   {
     path: 'oficinas',

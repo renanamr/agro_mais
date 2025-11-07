@@ -1,0 +1,136 @@
+<app-header></app-header>
+
+<div class="container p-4">
+  <a (click)="cancel()" class="text-decoration-none fw-bold" style="cursor: pointer;">
+    <i class="bi bi-arrow-left me-1"></i>
+    Voltar
+  </a>
+</div>
+
+<div class="container px-4">
+  <h1 class="h2 mb-4">{{ isEdit() ? 'Editar' : 'Cadastrar nova' }} Comunidade</h1>
+</div>
+
+@if (loading()) {
+  <app-loading></app-loading>
+} @else {
+
+<form (ngSubmit)="save()">
+
+  <!-- Dados gerais -->
+  <app-container-form title="Dados gerais">
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nome da comunidade</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.name"
+          (input)="updateField('name', $any($event.target).value)"
+          placeholder="Ex: Comunidade Serra Verde"
+          required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Aglomerado</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.clusterName"
+          (input)="updateField('clusterName', $any($event.target).value)"
+          placeholder="Ex: Aglomerado Norte"
+          required>
+      </div>
+    </div>
+
+  </app-container-form>
+
+  <!-- Endereço -->
+  <app-container-form title="Endereço">
+
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label class="form-label">CEP</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.address.zipCode"
+          (input)="updateAddressField('zipCode', $any($event.target).value)"
+          placeholder="00000-000"
+          required>
+      </div>
+
+      <div class="col-md-9">
+        <label class="form-label">Logradouro</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.address.streetAddress"
+          (input)="updateAddressField('streetAddress', $any($event.target).value)"
+          placeholder="Rua, avenida, sítio..."
+        >
+      </div>
+    </div>
+
+    <div class="row mt-3 g-3">
+      <div class="col-md-6">
+        <label class="form-label">Complemento</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.address.complement"
+          (input)="updateAddressField('complement', $any($event.target).value)"
+          placeholder="Casa A, setor 2, bloco 3..."
+        >
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Cidade</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.address.city"
+          (input)="updateAddressField('city', $any($event.target).value)"
+          required>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Estado</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="community()!.address.state"
+          (input)="updateAddressField('state', $any($event.target).value)"
+          required>
+      </div>
+    </div>
+
+  </app-container-form>
+
+  <!-- Observações -->
+  <app-container-form title="Observações">
+
+    <label class="form-label">Observações gerais</label>
+    <textarea
+      class="form-control"
+      rows="3"
+      [value]="community()!.obs"
+      (input)="updateField('obs', $any($event.target).value)"
+      placeholder="Informações adicionais sobre a comunidade..."
+    ></textarea>
+
+  </app-container-form>
+
+  <div class="container px-4 mb-5">
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      [disabled]="loading()">
+      <span>Salvar</span>
+    </button>
+  </div>
+
+</form>
+
+}

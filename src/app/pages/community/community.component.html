@@ -1,1 +1,39 @@
-<p>community works!</p>
+<app-header></app-header>
+
+<div class="p-4">
+  <app-card-page title="Comunidades" newButtonText="Nova" (newClick)="onNew()">
+
+    @if (loading()) {
+      <app-loading></app-loading>
+    } @else {
+
+      <app-table-header>
+        <div class="col-4">Nome</div>
+        <div class="col-3">Aglomerado</div>
+        <div class="col-3">Localização</div>
+        <div class="col-2">Ações</div>
+      </app-table-header>
+
+      @for(c of communityService.communityList(); track c.id) {
+        <app-item-table 
+          (editClick)="onEdit(c)" 
+          (viewClick)="onView(c)" 
+          (deleteClick)="onDelete(c)"
+          actionsCol="col-2">
+
+          <div class="col-4 text-truncate">{{ c.name }}</div>
+          <div class="col-3 text-truncate">{{ c.clusterName }}</div>
+          <div class="col-3 text-truncate">
+            {{ c.address.city }} - {{ c.address.state }}
+          </div>
+
+        </app-item-table>
+      }
+
+      @if(communityService.communityList().length === 0) {
+        <div class="text-center p-4 text-muted">Nenhuma comunidade.</div>
+      }
+
+    }
+  </app-card-page>
+</div>
