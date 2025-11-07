@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AdminFormCompoment } from './pages/admin/form/admin-form.component';
 import { UserComponent } from './pages/user/user.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 
@@ -51,9 +52,18 @@ export const routes: Routes = [
 },
 
   { 
-    path: 'admin', 
+    path: 'permissoes', 
     title: "Administradores",
-    component: AdminComponent
+    children: [
+      {
+        path: '', 
+        component: AdminComponent 
+      },
+      {
+        path: 'editar/:id', 
+        component: AdminFormCompoment 
+      }
+    ]    
   },
   { path: '**', redirectTo: '' }
 ];
