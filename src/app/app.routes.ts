@@ -5,6 +5,7 @@ import { VisitComponent } from './pages/visit/visit.component';
 import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { MeetingComponent } from './pages/meeting/meeting.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AdminFormCompoment } from './pages/admin/form/admin-form.component';
 import { UserComponent } from './pages/user/user.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 
@@ -55,9 +56,18 @@ export const routes: Routes = [
 },
 
   { 
-    path: 'admin', 
+    path: 'permissoes', 
     title: "Administradores",
-    component: AdminComponent
+    children: [
+      {
+        path: '', 
+        component: AdminComponent 
+      },
+      {
+        path: 'editar/:id', 
+        component: AdminFormCompoment 
+      }
+    ]    
   },
   { path: '**', redirectTo: '' }
 ];

@@ -56,28 +56,6 @@
           </div>
         </div>
       </app-container-form>
-    
-  
-      <app-container-form title="Permissões do Sistema">
-        <div class="col-12 col-md-6">
-          <label for="role" class="form-label">Papel<span class="text-danger">*</span></label>
-          <select class="form-select" id="role" formControlName="role">
-            <option value="Agente">Agente</option>
-            <option value="Administrador">Administrador</option>
-          </select>
-        </div>
-  
-        <div class="col-12 col-md-6">
-          <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
-          <select class="form-select" id="status" formControlName="status">
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
-          </select>
-        </div>
-      </app-container-form>
-  
-  
-    
       <div class="container px-4 mb-5" *ngIf="pageMode() !== 'View'">
         <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
           <span>Salvar</span>
