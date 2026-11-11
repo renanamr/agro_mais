@@ -1,0 +1,109 @@
+<app-header></app-header>
+
+<div class="container p-4">
+  <a (click)="goBack()" class="text-decoration-none fw-bold" style="cursor: pointer;">
+    <i class="bi bi-arrow-left me-1"></i>
+    Voltar
+  </a>
+</div>
+
+<div class="container px-4">
+  <h1 class="h2 mb-4">Editar Permissões do Usuário</h1>
+</div>
+
+@if(loading()){
+  <app-loading></app-loading>
+} @else {
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <!-- Dados do usuário (somente leitura) -->
+  <app-container-form title="Dados do usuário">
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">Nome</label>
+      <input 
+        type="text" 
+        class="form-control bg-light"
+        formControlName="name"
+        readonly>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">E-mail</label>
+      <input 
+        type="email" 
+        class="form-control bg-light"
+        formControlName="email"
+        readonly>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label">CPF</label>
+      <input 
+        type="text" 
+        class="form-control bg-light"
+        formControlName="cpf"
+        readonly>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label">Data de Nasc.</label>
+      <input 
+        type="date" 
+        class="form-control bg-light"
+        formControlName="birthDate"
+        readonly>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label">Telefone</label>
+      <input 
+        type="tel" 
+        class="form-control bg-light"
+        formControlName="phone"
+        readonly>
+    </div>
+
+  </app-container-form>
+
+
+
+  <!-- Permissões (editáveis) -->
+  <app-container-form title="Permissões do Sistema">
+
+    <div class="col-12 col-md-6">
+      <label for="role" class="form-label">Papel</label>
+      <select 
+        class="form-select"
+        id="role"
+        formControlName="role">
+        <option value="Agente">Agente</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label for="status" class="form-label">Status</label>
+      <select 
+        class="form-select"
+        id="status"
+        formControlName="status">
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+      </select>
+    </div>
+
+  </app-container-form>
+
+
+
+  <div class="container px-4 mb-5">
+    <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
+      <span>Salvar</span>
+    </button>
+  </div>
+
+</form>
+
+}

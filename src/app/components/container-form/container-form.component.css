@@ -1,0 +1,11 @@
+:host ::ng-deep .card-body .form-control:not(:disabled),
+:host ::ng-deep .card-body .form-select:not(:disabled) {
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .card-body .form-control:disabled,
+:host ::ng-deep .card-body .form-control[readonly],
+:host ::ng-deep .card-body .form-select:disabled {
+  background-color: #E9ECEF;
+  opacity: 1;
+}

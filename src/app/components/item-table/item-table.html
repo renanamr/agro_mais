@@ -1,0 +1,34 @@
+<ng-content></ng-content>
+
+@if(hasAnyAction){
+  <div [ngClass]="actionsCol" class="">
+  
+    @if(hasEditListener){
+      <button 
+      (click)="editClick.emit()" 
+      class="btn btn-link btn-sm p-1" 
+      title="Editar">
+      <i class="bi bi-pencil-square text-primary"></i>
+    </button>
+    }
+  
+    @if(hasViewListener){
+      <button 
+      (click)="viewClick.emit()" 
+      class="btn btn-link btn-sm p-1 ms-1" 
+      title="Visualizar">
+      <i class="bi bi-graph-up text-success"></i>
+    </button>
+    }
+  
+    @if(hasDeleteListener){
+      <button 
+      (click)="deleteClick.emit()" 
+      class="btn btn-link btn-sm p-1 ms-1" 
+      title="Excluir">
+      <i class="bi bi-trash-fill text-danger"></i>
+    </button>
+    }
+  
+  </div>
+}

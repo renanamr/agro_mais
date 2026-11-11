@@ -1,0 +1,34 @@
+<app-header></app-header>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h3>Detalhes da Reunião</h3>
+      <button class="btn btn-outline-primary" (click)="edit()">Editar</button>
+    </div>
+    <div class="card-body">
+
+      @if(loading()){
+        <app-loading></app-loading>
+      } @else {
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Data:</strong> {{ meeting()?.meetingDate | date:'fullDate' }}</p>
+            <p><strong>Hora:</strong> {{ meeting()?.startTime }} - {{ meeting()?.endTime }}</p>
+            <p><strong>Título:</strong> {{ meeting()?.title }}</p>
+            <p><strong>Agente:</strong> {{ meeting()?.agentName }}</p>
+            <p><strong>Comunidade:</strong> {{ meeting()?.communityName }}</p>
+            <p><strong>Agendador:</strong> {{ meeting()?.schedulingPersonName }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Observações:</strong></p>
+            <p class="text-muted">{{ meeting()?.notes || 'Nenhuma' }}</p>
+            <hr>
+            <p><strong>Ata da Reunião:</strong></p>
+          <div [innerHTML]="(meeting()?.meetingMinutes || '').replaceAll('\n', '<br>')"></div>
+          </div>
+        </div>
+        <button class="btn btn-secondary mt-3" (click)="back()">Voltar</button>
+      }
+    </div>
+  </div>
+</div>
